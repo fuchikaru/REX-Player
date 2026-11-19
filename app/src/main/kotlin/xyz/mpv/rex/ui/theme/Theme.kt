@@ -53,6 +53,7 @@ import androidx.core.view.drawToBitmap
 import xyz.mpv.rex.R
 import xyz.mpv.rex.preferences.AppearancePreferences
 import xyz.mpv.rex.preferences.preference.collectAsState
+import xyz.mpv.rex.utils.media.AppFontStore
 import org.koin.compose.koinInject
 import kotlin.math.hypot
 
@@ -440,8 +441,12 @@ fun MpvexTheme(content: @Composable () -> Unit) {
   val appTheme by preferences.appTheme.collectAsState()
   val themePreset by preferences.themePreset.collectAsState()
   val useSystemFont by preferences.useSystemFont.collectAsState()
+  val customFontFile by preferences.customFontFile.collectAsState()
   val darkTheme = isSystemInDarkTheme()
   val context = LocalContext.current
+  val customFontFamily = remember(customFontFile) {
+    customFontFamilyOrNull(AppFontStore.fileFor(context, customFontFile))
+  }
 
     val useDarkTheme = when (darkMode) {
         DarkMode.Dark -> true
@@ -466,7 +471,7 @@ fun MpvexTheme(content: @Composable () -> Unit) {
         ThemeTransitionContent {
             MaterialTheme(
                 colorScheme = colorScheme,
-                typography = getTypography(useSystemFont),
+                typography = getTypography(useSystemFont, customFontFamily),
                 shapes = AppShapes,
                 motionScheme = MotionScheme.expressive(),
                 content = content,
@@ -486,8 +491,12 @@ fun MpvexPlayerTheme(content: @Composable () -> Unit) {
     val appTheme by preferences.appTheme.collectAsState()
     val themePreset by preferences.themePreset.collectAsState()
     val useSystemFont by preferences.useSystemFont.collectAsState()
+    val customFontFile by preferences.customFontFile.collectAsState()
     val darkTheme = isSystemInDarkTheme()
     val context = LocalContext.current
+    val customFontFamily = remember(customFontFile) {
+        customFontFamilyOrNull(AppFontStore.fileFor(context, customFontFile))
+    }
 
     val isPlayerAlwaysDark = playerAlwaysDarkMode || enableGlassPlayerControls
     val useDarkTheme = if (isPlayerAlwaysDark) {
@@ -517,7 +526,7 @@ fun MpvexPlayerTheme(content: @Composable () -> Unit) {
         ThemeTransitionContent {
             MaterialTheme(
                 colorScheme = colorScheme,
-                typography = getTypography(useSystemFont),
+                typography = getTypography(useSystemFont, customFontFamily),
                 shapes = AppShapes,
                 motionScheme = MotionScheme.expressive(),
                 content = content,

@@ -61,6 +61,14 @@ object SearchablePreferences {
                 targetIndex = 3,
             ))
             add(SearchablePreference(
+                titleRes = R.string.pref_fonts_title,
+                summaryRes = R.string.pref_fonts_summary,
+                keywords = listOf("font", "fonts", "custom font", "typeface", "ttf", "otf", "typography", "text"),
+                category = "Appearance",
+                screen = FontsPreferencesScreen,
+                targetIndex = 0,
+            ))
+            add(SearchablePreference(
                 titleRes = R.string.pref_appearance_theme_preset_title,
                 summaryRes = R.string.pref_appearance_theme_preset_summary,
                 keywords = listOf("preset", "theme", "color", "palette", "expressive", "m3"),

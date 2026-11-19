@@ -53,6 +53,7 @@ import androidx.compose.material.icons.outlined.Language
 import androidx.compose.material.icons.filled.Language
 import androidx.compose.material.icons.filled.DragHandle
 import androidx.compose.material.icons.filled.SwapVert
+import androidx.compose.material.icons.filled.TextFields
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -232,6 +233,30 @@ object AppearancePreferencesScreen : Screen {
                                             color = MaterialTheme.colorScheme.outline,
                                         )
                                     },
+                                )
+                            }
+
+                            GroupedPreferenceCard(
+                              color = cardColor, tonalElevation = 0.dp,
+                                position = GroupPosition.MIDDLE,
+                                highlightKey = R.string.pref_fonts_title,
+                            ) {
+                                Preference(
+                                    title = { Text(text = stringResource(id = R.string.pref_fonts_title)) },
+                                    summary = {
+                                        Text(
+                                            text = stringResource(id = R.string.pref_fonts_summary),
+                                            color = MaterialTheme.colorScheme.outline,
+                                        )
+                                    },
+                                    icon = {
+                                        Icon(
+                                            Icons.Filled.TextFields,
+                                            contentDescription = null,
+                                            tint = MaterialTheme.colorScheme.primary,
+                                        )
+                                    },
+                                    onClick = { backstack.add(FontsPreferencesScreen) },
                                 )
                             }
 

@@ -32,6 +32,12 @@ class AppearancePreferences(
   val amoledMode = preferenceStore.getBoolean("amoled_mode", false)
   val matchPlayerControlsToTheme = preferenceStore.getBoolean("match_player_controls_to_theme", false)
   val useSystemFont = preferenceStore.getBoolean("use_system_font", false)
+
+  /** File name (inside `filesDir/app_fonts`) of the user-chosen UI font. Empty = no custom font. */
+  val customFontFile = preferenceStore.getString("custom_font_file", "")
+
+  /** Original file name / label of the custom font, only used for display in the Fonts screen. */
+  val customFontLabel = preferenceStore.getString("custom_font_label", "")
   val unlimitedNameLines = preferenceStore.getBoolean("unlimited_name_lines", false)
   val hidePlayerButtonsBackground = preferenceStore.getBoolean("hide_player_buttons_background", false)
   val showNextPreviousButtons = preferenceStore.getBoolean("show_next_previous_buttons", true)
